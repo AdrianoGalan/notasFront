@@ -1,0 +1,11 @@
+<form action="" class="form-horizontal" [formGroup]="aluno" (ngSubmit)="ngSubmit()">
+  <div class="mb-3">
+    <label for="formGroupExampleInput" class="form-label">RA</label>
+    <input type="number" class="form-control" id="formGroupExampleInput" formControlName="ra" placeholder="Digite o ra do aluno">
+  </div>
+  <div class="mb-3">
+    <label for="formGroupExampleInput2" class="form-label">Nome</label>
+    <input type="text" class="form-control" id="formGroupExampleInput2" formControlName="nome" placeholder="Digite o nome do aluno">
+  </div>
+  <button class="btn btn-primary" type="submit">Salvar</button>
+</form>
