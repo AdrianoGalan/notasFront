@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap, delay, take } from 'rxjs/operators';
 import { Aluno } from './aluno';
 
@@ -12,13 +12,26 @@ export class AlunoServiceService {
 
   private readonly API = "http://localhost:8080/WebServiceNotas/aluno"
 
-constructor(private http: HttpClient) { }
 
-list(){
-  return this.http.get<Aluno[]>(this.API)
-  .pipe(
-    tap(console.log)
-  );
-}
+  constructor(private http: HttpClient) { }
 
+  list() {
+    return this.http.get<Aluno[]>(this.API)
+      .pipe(
+        tap(console.log)
+      );
+  }
+
+  add(aluno: Aluno) {
+
+
+
+      return this.http.post(this.API, JSON.stringify(aluno), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
+
+  }
+
+  remove(aluno: Aluno) {
+    console.log(aluno)
+    return this.http.delete(`${this.API}/${aluno.ra}`,  {responseType: 'text' }).pipe(take(1));
+  }
 }

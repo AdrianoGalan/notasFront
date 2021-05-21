@@ -31,15 +31,23 @@ export class AlunoListaComponent implements OnInit {
   }
 
   onRefresh() {
-    this.alunos$ = this.service.list().pipe(
-      take(1)
-
-    );
+    this.alunos$ = this.service.list().pipe(take(1));
   }
 
   onEdit(aluno: any){
 
     this.router.navigate(['editar', aluno.ra], {relativeTo: this.route});
+  }
+
+  onDelete(aluno: Aluno){
+
+    this.service.remove(aluno).subscribe(
+      success => {
+
+        this.onRefresh();
+      },
+    )
+
   }
 
 }

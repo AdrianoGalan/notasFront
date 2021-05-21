@@ -1,6 +1,8 @@
-import { ApplicationRef, Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+import { AlunoServiceService } from './../alunoservice';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-aluno-form',
@@ -13,30 +15,39 @@ export class AlunoFormComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private http: HttpClient
+    private service: AlunoServiceService,
+    private location: Location,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit() {
 
-    this.aluno =this.formBuilder.group({
 
-      ra: [null],
-      nome:[null]
+    const aluno = this.route.snapshot.data['aluno'];
+
+    this.aluno = this.formBuilder.group({
+
+      
+
+      ra: [aluno.ra],
+      nome: [aluno.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
 
 
     });
   }
 
-  ngSubmit(){
+  ngSubmit() {
 
-    const httpOptions = {
-      headers: new HttpHeaders({'Content-Type': 'application/json'})
-    }
 
-      this.http.post('http://localhost:8080/WebServiceNotas/aluno', JSON.stringify(this.aluno.value), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text'}).subscribe(dados =>{
-        console.log(dados);
-        this.aluno.reset();
-      })
+
+    this.service.add(this.aluno.value).subscribe(
+
+      success => {
+
+        this.location.back();
+      },
+
+    );
   }
 
 }
