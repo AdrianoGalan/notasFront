@@ -1,4 +1,4 @@
 export interface Aluno {
-  ra: number;
-  nome: string;
+  ra: any
+  nome: any
 }

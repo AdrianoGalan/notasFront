@@ -24,14 +24,20 @@ export class AlunoServiceService {
 
   add(aluno: Aluno) {
 
-
-
       return this.http.post(this.API, JSON.stringify(aluno), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
 
   }
 
+  getByRa(ra: Number){
+
+    return this.http.get<Aluno>(`${this.API}/${ra}`)
+    .pipe(
+      tap(console.log)
+    );
+  }
+
   remove(aluno: Aluno) {
-    console.log(aluno)
+
     return this.http.delete(`${this.API}/${aluno.ra}`,  {responseType: 'text' }).pipe(take(1));
   }
 }

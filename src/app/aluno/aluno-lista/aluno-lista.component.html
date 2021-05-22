@@ -5,11 +5,11 @@
     </div>
     <div class="float-right">
       <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Aluno</button>
-      <button type="button" class="btn btn-secondary" (click)="onRefresh()" >Atualizar</button>
+      <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-hover">
+    <table class="table table-hover" *ngIf="(alunos$ | async) as alunosh; else loading">
       <thead>
         <tr>
           <th>Ra</th>
@@ -18,7 +18,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let aluno of alunos$ | async">
+        <tr *ngFor="let aluno of alunosh">
           <td>{{aluno.ra}}</td>
           <td>{{aluno.nome}}</td>
           <td>
@@ -27,7 +27,7 @@
                 Atualizar
               </button>
 
-              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(aluno)" >
+              <button class="btn btn-outline-danger mb-1 btn-sm" (click)="onDelete(aluno)">
                 Remover
               </button>
             </span>
@@ -37,5 +37,19 @@
     </table>
 
     <ng-template #loading>
-      <span>Carregando Cursos...</span>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
     </ng-template>
+  </div>
+</div>
+
+<ng-template #deliteModel>
+  <div class="modal-body text-center">
+    <p>Comfirma deletar?</p>
+    <button type="button" class="btn btn-default" (click)="confirm()" >Sim</button>
+    <button type="button" class="btn btn-primary" (click)="decline()" >Não</button>
+  </div>
+</ng-template>

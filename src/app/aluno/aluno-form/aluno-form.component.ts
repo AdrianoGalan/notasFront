@@ -3,6 +3,7 @@ import { AlunoServiceService } from './../alunoservice';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
+import { Aluno } from '../aluno';
 
 @Component({
   selector: 'app-aluno-form',
@@ -23,11 +24,13 @@ export class AlunoFormComponent implements OnInit {
   ngOnInit() {
 
 
-    const aluno = this.route.snapshot.data['aluno'];
+    const aluno: Aluno = this.route.snapshot.data['aluno'];
+
+
 
     this.aluno = this.formBuilder.group({
 
-      
+
 
       ra: [aluno.ra],
       nome: [aluno.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
