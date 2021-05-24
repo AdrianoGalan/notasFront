@@ -1,15 +1,15 @@
 <div class="card mt-3">
   <div class="card-header">
-    <div class="float-left">
+    <div class="float-start">
       <h4>Aluno</h4>
     </div>
-    <div class="float-right">
+    <div class="float-end">
       <button type="button" class="btn btn-primary" [routerLink]="['novo']">Novo Aluno</button>
       <button type="button" class="btn btn-secondary" (click)="onRefresh()">Atualizar</button>
     </div>
   </div>
   <div class="card-body">
-    <table class="table table-hover" *ngIf="(alunos$ | async) as alunosh; else loading">
+    <table class="table  table-hover" *ngIf="(alunos$ | async) as alunosh; else loading">
       <thead>
         <tr>
           <th>Ra</th>
@@ -22,7 +22,7 @@
           <td>{{aluno.ra}}</td>
           <td>{{aluno.nome}}</td>
           <td>
-            <span class="float-right">
+            <span class="float-end">
               <button class="btn btn-outline-warning mb-1 btn-sm" (click)="onEdit(aluno)">
                 Atualizar
               </button>

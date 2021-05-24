@@ -10,7 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     CommonModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule
   ],
   declarations: [AlunoFormComponent]
 })

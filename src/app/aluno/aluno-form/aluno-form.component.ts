@@ -13,13 +13,16 @@ import { Aluno } from '../aluno';
 export class AlunoFormComponent implements OnInit {
 
   aluno!: FormGroup;
+  submitted = false;
 
   constructor(
     private formBuilder: FormBuilder,
     private service: AlunoServiceService,
     private location: Location,
     private route: ActivatedRoute
-  ) { }
+  ) {
+
+  }
 
   ngOnInit() {
 
@@ -32,16 +35,21 @@ export class AlunoFormComponent implements OnInit {
 
 
 
-      ra: [aluno.ra],
+      ra: [aluno.ra, [Validators.required]],
       nome: [aluno.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
 
 
     });
   }
 
+  hasError(field: string) {
+    console.log(this.aluno.get(field)?.errors)
+    return this.aluno.get(field)?.errors
+  }
+
   ngSubmit() {
 
-
+    this.submitted = true;
 
     this.service.add(this.aluno.value).subscribe(
 
@@ -51,6 +59,12 @@ export class AlunoFormComponent implements OnInit {
       },
 
     );
+  }
+
+  onCancel() {
+    this.submitted = false;
+    this.aluno.reset();
+    // console.log('onCancel');
   }
 
 }
