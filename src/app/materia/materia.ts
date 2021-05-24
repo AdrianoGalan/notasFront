@@ -3,7 +3,7 @@ export interface Materia {
  nome:      any;
  sigla:     any;
  turno:     any;
- num_aulas: any;
+ numAulas: any;
 }
 
 
