@@ -32,7 +32,7 @@ export class AlunoServiceService {
 
     return this.http.get<Aluno>(`${this.API}/${ra}`)
     .pipe(
-      tap(console.log)
+      tap()
     );
   }
 

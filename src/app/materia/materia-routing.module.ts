@@ -1,9 +1,17 @@
+import { MateriaResolverGuard } from './guards/materia-resolver.guard';
+import { MateriaDetalheComponent } from './materia-detalhe/materia-detalhe.component';
 import { MateriaListaComponent } from './materia-lista/materia-lista.component';
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 const routes: Routes = [
-  {path: '', component: MateriaListaComponent}
+  {path: '', component: MateriaListaComponent},
+  {
+    path: 'detalhe/:id', component: MateriaDetalheComponent,
+    resolve: {
+      materia: MateriaResolverGuard
+    }
+  }
 ];
 
 @NgModule({

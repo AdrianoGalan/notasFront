@@ -43,14 +43,6 @@ export class MateriaListaComponent implements OnInit {
   }
 
 
-  GerarAulas(){
-
-  }
-
-
-
-
-
 
   handleError(){
     this.bsModalRef = this.modalService.show(AlertModalComponent);
@@ -61,6 +53,12 @@ export class MateriaListaComponent implements OnInit {
     this.bsModalRef = this.modalService.show(AlertModalComponent);
     this.bsModalRef.content.type = 'danger';
     this.bsModalRef.content.message = 'Erro ao deletar';
+  }
+
+  onClikTabela(materia: Materia){
+
+    this.router.navigate(['detalhe', materia.codigo], {relativeTo: this.route});
+
   }
 
 }

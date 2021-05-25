@@ -20,5 +20,13 @@ export class MateriaService {
       );
   }
 
+  getByCodigo(codigo: Number){
+
+    return this.http.get<Materia>(`${this.API}/${codigo}`)
+    .pipe(
+      tap()
+    );
+  }
+
 
 }
