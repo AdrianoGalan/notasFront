@@ -1,11 +1,28 @@
-<div class="row g-3">
+<form class="needs-validation" novalidate [formGroup]="materiaForm"  style="padding-top: 10px">
+<div class="row g-3" style="margin-top: 5px;">
+  <div class="float-start">
+    <h2 class="text-center">Disciplina</h2>
+  </div>
+
+
   <div class="col-sm-2">
-    <input type="text" class="form-control" placeholder="City" aria-label="City">
+    <label class="form-label">Codigo</label>
+    <fieldset disabled>
+      <input type="text" class="form-control" formControlName="matCodigo" placeholder="Codigo">
+    </fieldset>
   </div>
-  <div class="col-sm">
-    <input type="text" class="form-control" placeholder="State" aria-label="State">
+  <div class="col-sm-8">
+    <label class="form-label">Nome</label>
+    <fieldset disabled>
+      <input type="text" class="form-control" formControlName="matNome" placeholder="Nome">
+    </fieldset>
   </div>
-  <div class="col-sm">
-    <input type="text" class="form-control" placeholder="Zip" aria-label="Zip">
+  <div class="col-sm-2">
+    <label class="form-label">Turma</label>
+    <fieldset disabled>
+      <input type="text" class="form-control" formControlName="matTurma" placeholder="turma">
+    </fieldset>
   </div>
+
 </div>
+</form>

@@ -1,3 +1,4 @@
+import { MateriaModule } from './materia/materia.module';
 import { AlunoListaModule } from './aluno/aluno-lista/aluno-lista.module';
 import { AlunoFormModule } from './aluno/aluno-form/aluno-form.module';
 import { BrowserModule } from '@angular/platform-browser';
