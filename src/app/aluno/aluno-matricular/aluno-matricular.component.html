@@ -1,0 +1,76 @@
+<form class="needs-validation" novalidate [formGroup]="alunoForm" style="padding-top: 10px">
+  <div class="row g-3" style="margin-top: 5px;">
+    <div class="float-start">
+      <h3>Aluno</h3>
+    </div>
+    <div class="col-sm-2">
+      <label class="form-label">Codigo</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="ra" placeholder="Codigo">
+      </fieldset>
+    </div>
+    <div class="col-sm-8">
+      <label class="form-label">Nome</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="nome" placeholder="Nome">
+      </fieldset>
+    </div>
+  </div>
+</form>
+
+<form class="needs-validation" novalidate [formGroup]="formMatricular" style="padding-top: 20px">
+  <label class="form-label">Disciplina</label>
+  <div class="input-group">
+    <select class="form-select" id="inputGroupSelect04" formControlName="curso">
+      <option selected>Selecione uma Materia ...</option>
+      <option *ngFor="let materia of materias$ | async">{{ materia.nome }}</option>
+
+    </select>
+    <button class="btn btn-outline-info" type="button" (click)="onMatricular()">Matricular</button>
+  </div>
+</form>
+
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="float-start">
+      <h4>Materias</h4>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table  table-hover" *ngIf="(materiasAluno$ | async) as materiash; else loading">
+      <thead>
+        <tr>
+          <th>Codigo</th>
+          <th>Nome</th>
+          <th>Sigla</th>
+          <th>Turno</th>
+          <th>N Aulas</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let materia of materiash">
+          <td>{{materia.codigo}}</td>
+          <td>{{materia.nome}}</td>
+          <td>{{materia.sigla}}</td>
+          <td>{{materia.turno}}</td>
+          <td>{{materia.numAulas}}</td>
+          <td>
+
+            <span class="float-end">
+              <button class="btn btn-outline-info mb-1 btn-sm" >
+                Detalhe
+              </button>
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+<ng-template #loading>
+  <div class="d-flex justify-content-center">
+    <div class="spinner-border" role="status">
+      <span class="visually-hidden">Loading...</span>
+    </div>
+  </div>
+</ng-template>

@@ -1,3 +1,4 @@
+import { AlunoMatricularComponent } from './aluno-matricular/aluno-matricular.component';
 import { AlunoResolverGuard } from './guards/aluno-resolver.guard';
 import { AlunoFormComponent } from './aluno-form/aluno-form.component';
 import { AlunoListaComponent } from './aluno-lista/aluno-lista.component';
@@ -13,6 +14,10 @@ const routes: Routes = [
     }
   },
   { path: 'editar/:id', component: AlunoFormComponent,
+  resolve: {
+    aluno: AlunoResolverGuard
+  } },
+  { path: 'matricular/:id', component: AlunoMatricularComponent,
   resolve: {
     aluno: AlunoResolverGuard
   } }

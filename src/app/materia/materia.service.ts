@@ -1,3 +1,4 @@
+import { Aluno } from './../aluno/aluno';
 import { tap } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -20,12 +21,28 @@ export class MateriaService {
       );
   }
 
-  getByCodigo(codigo: Number){
+  getByCodigo(codigo: Number) {
 
     return this.http.get<Materia>(`${this.API}/${codigo}`)
-    .pipe(
-      tap()
-    );
+      .pipe(
+        tap()
+      );
+  }
+
+  getAlunoMatriculado(codigoMateria: Number) {
+
+    return this.http.get<Aluno[]>(`${this.API}/${"aluno/"}${codigoMateria}`)
+      .pipe(
+        tap(console.log)
+      );
+  }
+
+  getMateriasAluno(ra: Number) {
+
+    return this.http.get<Aluno[]>(`${this.API}/${"list/"}${ra}`)
+      .pipe(
+        tap(console.log)
+      );
   }
 
 

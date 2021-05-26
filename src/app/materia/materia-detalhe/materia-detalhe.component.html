@@ -1,28 +1,61 @@
-<form class="needs-validation" novalidate [formGroup]="materiaForm"  style="padding-top: 10px">
-<div class="row g-3" style="margin-top: 5px;">
-  <div class="float-start">
-    <h2 class="text-center">Disciplina</h2>
-  </div>
+<form class="needs-validation" novalidate [formGroup]="materiaForm" style="padding-top: 10px">
+  <div class="row g-3" style="margin-top: 5px;">
+    <div class="float-start">
+      <h2 class="text-center">Disciplina</h2>
+    </div>
 
 
-  <div class="col-sm-2">
-    <label class="form-label">Codigo</label>
-    <fieldset disabled>
-      <input type="text" class="form-control" formControlName="matCodigo" placeholder="Codigo">
-    </fieldset>
-  </div>
-  <div class="col-sm-8">
-    <label class="form-label">Nome</label>
-    <fieldset disabled>
-      <input type="text" class="form-control" formControlName="matNome" placeholder="Nome">
-    </fieldset>
-  </div>
-  <div class="col-sm-2">
-    <label class="form-label">Turma</label>
-    <fieldset disabled>
-      <input type="text" class="form-control" formControlName="matTurma" placeholder="turma">
-    </fieldset>
-  </div>
+    <div class="col-sm-2">
+      <label class="form-label">Codigo</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matCodigo" placeholder="Codigo">
+      </fieldset>
+    </div>
+    <div class="col-sm-8">
+      <label class="form-label">Nome</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matNome" placeholder="Nome">
+      </fieldset>
+    </div>
+    <div class="col-sm-2">
+      <label class="form-label">Turma</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matTurma" placeholder="turma">
+      </fieldset>
+    </div>
 
-</div>
+  </div>
 </form>
+
+<div class="card mt-3">
+  <div class="card-header">
+    <div class="float-start">
+      <h4>Alunos Matriculados</h4>
+    </div>
+  </div>
+  <div class="card-body">
+    <table class="table  table-hover" *ngIf="(alunos$ | async) as alunosh; else loading">
+      <thead>
+        <tr>
+          <th>Ra</th>
+          <th>Aluno</th>
+         
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let aluno of alunosh">
+          <td>{{aluno.ra}}</td>
+          <td>{{aluno.nome}}</td>
+         </tr>
+      </tbody>
+    </table>
+
+    <ng-template #loading>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>
+  </div>
+</div>

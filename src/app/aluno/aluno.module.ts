@@ -1,14 +1,18 @@
+import { ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 import { AlunoRoutingModule } from './aluno-routing.module';
+import { AlunoMatricularComponent } from './aluno-matricular/aluno-matricular.component';
 
 
 @NgModule({
-  declarations: [],
+  declarations: [AlunoMatricularComponent],
   imports: [
     CommonModule,
-    AlunoRoutingModule
+    AlunoRoutingModule,
+    ReactiveFormsModule
+
   ]
 })
 export class AlunoModule { }

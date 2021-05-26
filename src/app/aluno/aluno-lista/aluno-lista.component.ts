@@ -50,6 +50,9 @@ export class AlunoListaComponent implements OnInit {
 
     this.router.navigate(['editar', aluno.ra], {relativeTo: this.route});
   }
+  onMatricula(aluno: any){
+    this.router.navigate(['matricular', aluno.ra], {relativeTo: this.route});
+  }
 
   onDelete(aluno: Aluno){
 

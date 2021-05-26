@@ -1,3 +1,8 @@
+import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { catchError } from 'rxjs/operators';
+import { Observable, empty } from 'rxjs';
+import { Aluno } from './../../aluno/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { MateriaService } from './../materia.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
@@ -12,28 +17,49 @@ import { Materia } from '../materia';
 export class MateriaDetalheComponent implements OnInit {
 
   materiaForm!: FormGroup;
+  alunos$!: Observable<Aluno[]>;
+  materia!: Materia;
+  bsModalRef!: BsModalRef;
 
   constructor(
     private FormBuilder: FormBuilder,
     private service: MateriaService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit(): void {
 
 
-    const materia: Materia = this.route.snapshot.data['materia'];
+    this.materia = this.route.snapshot.data['materia'];
 
     this.materiaForm = this.FormBuilder.group({
 
 
 
-      matCodigo: [materia.codigo],
-      matNome: [materia.nome],
-      matTurma: [materia.turno]
+      matCodigo: [this.materia.codigo],
+      matNome: [this.materia.nome],
+      matTurma: [this.materia.turno]
 
 
     });
+
+    this.onRefreshAlunos();
+  }
+
+
+  onRefreshAlunos() {
+    this.alunos$ = this.service.getAlunoMatriculado(this.materia.codigo).pipe(
+      catchError(error => {
+        this.handleError();
+        return empty();
+      }));
+  }
+
+  handleError() {
+    this.bsModalRef = this.modalService.show(AlertModalComponent);
+    this.bsModalRef.content.type = 'danger';
+    this.bsModalRef.content.message = 'Erro ao carregar';
   }
 
 }
