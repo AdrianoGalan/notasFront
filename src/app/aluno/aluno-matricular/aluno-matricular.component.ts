@@ -22,7 +22,6 @@ export class AlunoMatricularComponent implements OnInit {
   bsModalRef!: BsModalRef;
   deletMoalRef!: BsModalRef;
   formMatricular!: FormGroup;
-  alunoForm!: FormGroup;
   aluno!: Aluno;
   matricula!: Matricula;
   disciplina!: Materia;
@@ -40,10 +39,7 @@ export class AlunoMatricularComponent implements OnInit {
     this.aluno = this.route.snapshot.data['aluno'];
 
     this.formMatricular = this.formBuilder.group({
-      curso: null
-    });
-
-    this.alunoForm = this.formBuilder.group({
+      curso: [null, [Validators.required, Validators.minLength(3)]],
       ra: [this.aluno.ra, [Validators.required]],
       nome: [this.aluno.nome, [Validators.required, Validators.minLength(3), Validators.maxLength(250)]]
     });
@@ -73,32 +69,18 @@ export class AlunoMatricularComponent implements OnInit {
     this.matricula = new Matricula();
 
 
-
-   this.materias$.forEach(element => {
-
-    for (let index = 0; index < element.length; index++) {
-
-
-
-    }
-
-
-  });
-
-
     this.matricula.aluno = this.aluno;
-    //this.matricula.disciplina =
+    this.matricula.disciplina = this.formMatricular.get("curso")?.value;
     this.matricula.anoSemestre = 20212;
 
-   // console.log(this.matricula)
-  //   this.service.add(this.matricula).subscribe(
+    this.service.add(this.matricula).subscribe(
 
-  //     success => {
+      success => {
 
-  //       this.onRefreshMaterias();
-  //     },
+        this.onRefreshMaterias();
+      },
 
-  //  );
+    );
 
   }
 

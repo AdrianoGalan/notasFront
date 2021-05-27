@@ -1,4 +1,4 @@
-<form class="needs-validation" novalidate [formGroup]="alunoForm" style="padding-top: 10px">
+<form class="needs-validation" novalidate [formGroup]="formMatricular" (ngSubmit)="onMatricular()" style="padding-top: 10px">
   <div class="row g-3" style="margin-top: 5px;">
     <div class="float-start">
       <h3>Aluno</h3>
@@ -16,17 +16,14 @@
       </fieldset>
     </div>
   </div>
-</form>
 
-<form class="needs-validation" novalidate [formGroup]="formMatricular" style="padding-top: 20px">
   <label class="form-label">Disciplina</label>
   <div class="input-group">
     <select class="form-select" id="inputGroupSelect04" formControlName="curso">
-      <option selected>Selecione uma Materia ...</option>
-      <option *ngFor="let materia of materias$ | async">{{ materia.nome }}</option>
+      <option *ngFor="let materia of materias$ | async" [ngValue]="materia">{{ materia.nome }}</option>
 
     </select>
-    <button class="btn btn-outline-info" type="button" (click)="onMatricular()">Matricular</button>
+    <button class="btn btn-outline-info" type="submit">Matricular</button>
   </div>
 </form>
 
@@ -58,7 +55,7 @@
           <td>
 
             <span class="float-end">
-              <button class="btn btn-outline-info mb-1 btn-sm" >
+              <button class="btn btn-outline-info mb-1 btn-sm">
                 Detalhe
               </button>
             </span>
@@ -67,10 +64,10 @@
       </tbody>
     </table>
 
-<ng-template #loading>
-  <div class="d-flex justify-content-center">
-    <div class="spinner-border" role="status">
-      <span class="visually-hidden">Loading...</span>
-    </div>
-  </div>
-</ng-template>
+    <ng-template #loading>
+      <div class="d-flex justify-content-center">
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
+      </div>
+    </ng-template>

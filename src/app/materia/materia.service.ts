@@ -51,7 +51,7 @@ export class MateriaService {
 
   add(matricula: Matricula) {
 
-    return this.http.post(`${this.API}/${"add/"}`, JSON.stringify(matricula), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
+    return this.http.post(`${this.API}/${"add"}`, JSON.stringify(matricula), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
 
 }
 
