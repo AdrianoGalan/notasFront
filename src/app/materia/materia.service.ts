@@ -1,8 +1,11 @@
+import { Matricula } from './../matricula/matricula';
 import { Aluno } from './../aluno/aluno';
-import { tap } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { tap, take } from 'rxjs/operators';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Materia } from './materia';
+
+
 
 @Injectable({
   providedIn: 'root'
@@ -44,6 +47,14 @@ export class MateriaService {
         tap(console.log)
       );
   }
+
+
+  add(matricula: Matricula) {
+
+    return this.http.post(`${this.API}/${"add/"}`, JSON.stringify(matricula), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
+
+}
+
 
 
 }

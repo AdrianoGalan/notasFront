@@ -1,7 +1,8 @@
+import { Matricula } from './../../matricula/matricula';
 import { Aluno } from './../aluno';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
-import { catchError } from 'rxjs/operators';
+import { catchError, map, take } from 'rxjs/operators';
 import { Router, ActivatedRoute } from '@angular/router';
 import { MateriaService } from './../../materia/materia.service';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -23,6 +24,8 @@ export class AlunoMatricularComponent implements OnInit {
   formMatricular!: FormGroup;
   alunoForm!: FormGroup;
   aluno!: Aluno;
+  matricula!: Matricula;
+  disciplina!: Materia;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -37,8 +40,7 @@ export class AlunoMatricularComponent implements OnInit {
     this.aluno = this.route.snapshot.data['aluno'];
 
     this.formMatricular = this.formBuilder.group({
-      curso: null ,
-      nome: null
+      curso: null
     });
 
     this.alunoForm = this.formBuilder.group({
@@ -58,7 +60,7 @@ export class AlunoMatricularComponent implements OnInit {
       }));
   }
 
-  onRefreshMaterias(){
+  onRefreshMaterias() {
     this.materiasAluno$ = this.service.getMateriasAluno(this.aluno.ra).pipe(
       catchError(error => {
         this.handleError();
@@ -66,11 +68,41 @@ export class AlunoMatricularComponent implements OnInit {
       }));
   }
 
-  onMatricular(){
-    this.onRefreshMaterias();
+  onMatricular() {
+
+    this.matricula = new Matricula();
+
+
+
+   this.materias$.forEach(element => {
+
+    for (let index = 0; index < element.length; index++) {
+
+
+
+    }
+
+
+  });
+
+
+    this.matricula.aluno = this.aluno;
+    //this.matricula.disciplina =
+    this.matricula.anoSemestre = 20212;
+
+   // console.log(this.matricula)
+  //   this.service.add(this.matricula).subscribe(
+
+  //     success => {
+
+  //       this.onRefreshMaterias();
+  //     },
+
+  //  );
+
   }
 
-  handleError(){
+  handleError() {
     this.bsModalRef = this.modalService.show(AlertModalComponent);
     this.bsModalRef.content.type = 'danger';
     this.bsModalRef.content.message = 'Erro ao carregar';
