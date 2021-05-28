@@ -1,6 +1,7 @@
+import { Nota } from './../nota/nota';
 import { Matricula } from './../matricula/matricula';
 import { Aluno } from './../aluno/aluno';
-import { tap, take } from 'rxjs/operators';
+import { tap, take, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Materia } from './materia';
@@ -20,6 +21,7 @@ export class MateriaService {
   list() {
     return this.http.get<Materia[]>(this.API)
       .pipe(
+        take(1),
         tap(console.log)
       );
   }
@@ -27,15 +29,17 @@ export class MateriaService {
   getByCodigo(codigo: Number) {
 
     return this.http.get<Materia>(`${this.API}/${codigo}`)
-      .pipe(
-        tap()
-      );
+    .pipe(
+      tap(),
+      take(1)
+    );
   }
 
   getAlunoMatriculado(codigoMateria: Number) {
 
     return this.http.get<Aluno[]>(`${this.API}/${"aluno/"}${codigoMateria}`)
       .pipe(
+        take(1),
         tap(console.log)
       );
   }
@@ -44,6 +48,7 @@ export class MateriaService {
 
     return this.http.get<Aluno[]>(`${this.API}/${"list/"}${ra}`)
       .pipe(
+        take(1),
         tap(console.log)
       );
   }
@@ -53,9 +58,9 @@ export class MateriaService {
 
     return this.http.post(`${this.API}/${"add"}`, JSON.stringify(matricula), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
 
-}
+  }
 
-  
+
 
 
 

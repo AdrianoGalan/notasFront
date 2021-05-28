@@ -36,6 +36,8 @@ export class AlunoListaComponent implements OnInit {
 
   ngOnInit() {
     this.onRefresh();
+
+    
   }
 
   onRefresh() {

@@ -1,8 +1,9 @@
+import { NotaService } from './../../nota/nota.service';
 import { Avaliacao } from './../../avaliacao/avaliacao';
 import { Nota } from './../../nota/nota';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { catchError } from 'rxjs/operators';
+import { catchError} from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { Aluno } from './../../aluno/aluno';
 import { ActivatedRoute } from '@angular/router';
@@ -22,23 +23,26 @@ export class MateriaDetalheComponent implements OnInit {
   alunos$!: Observable<Aluno[]>;
   materia!: Materia;
   bsModalRef!: BsModalRef;
-  nota!: Nota;
-  avaliacao!: Avaliacao;
+
+
+  notas$!: Observable<Nota[]>;
+  materias$!: Observable<Materia[]>;
+
 
   constructor(
     private FormBuilder: FormBuilder,
     private serviceMateria: MateriaService,
-    //private serviceNota: NotaService,
+    private serviceNota: NotaService,
     private route: ActivatedRoute,
     private modalService: BsModalService,
+    private nota: Nota,
+    private avaliacao: Avaliacao,
 
   ) { }
 
   ngOnInit(): void {
 
-
     this.materia = this.route.snapshot.data['materia'];
-
     this.materiaForm = this.FormBuilder.group({
 
 
@@ -74,23 +78,33 @@ export class MateriaDetalheComponent implements OnInit {
 
   onSalvar(aluno: Aluno) {
 
-    this.nota = new Nota();
-    this.avaliacao = new Avaliacao();
-    this.nota.aluno = aluno
 
-    if (this.materiaForm.get("p1")) {
-      this.avaliacao.codigo = 1;
-      this.avaliacao.tipo = "P1";
-      this.nota.avaliacao = this.avaliacao
+    this.nota.aluno = aluno;
 
-      this.nota.nota = this.materiaForm.get("p1")?.value
 
-    }
 
-   // this.serviceNota.
 
+    this.nota.disciplina = this.materia
+
+    this.avaliacao.codigo = 1;
+    this.avaliacao.tipo = "P1";
+    this.nota.avaliacao = this.avaliacao;
+
+    this.nota.nota = this.materiaForm.get("p1")?.value;
 
     console.log(this.nota)
+
+    this.serviceNota.add(this.nota).subscribe(
+
+      success => {
+
+        console.log("agora foi");
+      },
+
+    );
+
+
+
 
   }
 

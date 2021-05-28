@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap, delay, take } from 'rxjs/operators';
+import { tap, take } from 'rxjs/operators';
 import { Aluno } from './aluno';
 
 @Injectable({
@@ -18,7 +18,7 @@ export class AlunoServiceService {
   list() {
     return this.http.get<Aluno[]>(this.API)
       .pipe(
-        tap(console.log)
+        take(1)
       );
   }
 
@@ -32,7 +32,8 @@ export class AlunoServiceService {
 
     return this.http.get<Aluno>(`${this.API}/${ra}`)
     .pipe(
-      tap()
+      tap(),
+      take(1)
     );
   }
 

@@ -1,3 +1,7 @@
+import { catchError } from 'rxjs/operators';
+import { NotaService } from './../nota.service';
+import { Nota } from './../nota';
+import { Observable, empty } from 'rxjs';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -7,9 +11,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class NotaListaComponent implements OnInit {
 
-  constructor() { }
+  notas!: Observable<Nota[]>;
+
+  constructor(private serviceNota: NotaService) { }
 
   ngOnInit() {
+
+    this.notas = this.serviceNota.list().pipe(
+      catchError(error => {
+
+        return empty();
+      }
+      ));
   }
+
 
 }

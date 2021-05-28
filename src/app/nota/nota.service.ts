@@ -8,15 +8,16 @@ import { Injectable } from '@angular/core';
 })
 export class NotaService {
 
-  private readonly API = "http://localhost:8080/WebServiceNotas/nota"
+  private readonly API = "http://localhost:8080/WebServiceNotas/notas"
 
 
   constructor(private http: HttpClient) { }
 
   list() {
-    return this.http.get<Nota[]>(this.API)
-      .pipe(
-        take(1)
+
+    console.log("passou aki")
+    return this.http.get<Nota[]>(this.API).pipe(
+        tap(console.log)
       );
   }
 
@@ -34,6 +35,7 @@ export class NotaService {
 
   add(nota: Nota) {
 
+    console.log(nota);
     return this.http.post(`${this.API}/${"add"}`, JSON.stringify(nota), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
 
   }
