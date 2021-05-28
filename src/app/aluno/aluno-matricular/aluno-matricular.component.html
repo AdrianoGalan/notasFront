@@ -1,4 +1,5 @@
-<form class="needs-validation" novalidate [formGroup]="formMatricular" (ngSubmit)="onMatricular()" style="padding-top: 10px">
+<form class="needs-validation" novalidate [formGroup]="formMatricular" (ngSubmit)="onMatricular()"
+  style="padding-top: 10px">
   <div class="row g-3" style="margin-top: 5px;">
     <div class="float-start">
       <h3>Aluno</h3>
@@ -19,7 +20,8 @@
 
   <label class="form-label">Disciplina</label>
   <div class="input-group">
-    <select class="form-select" id="inputGroupSelect04" formControlName="curso">
+    <select class="form-select"  formControlName="curso">
+
       <option *ngFor="let materia of materias$ | async" [ngValue]="materia">{{ materia.nome }}</option>
 
     </select>
@@ -53,12 +55,6 @@
           <td>{{materia.turno}}</td>
           <td>{{materia.numAulas}}</td>
           <td>
-
-            <span class="float-end">
-              <button class="btn btn-outline-info mb-1 btn-sm">
-                Detalhe
-              </button>
-            </span>
           </td>
         </tr>
       </tbody>

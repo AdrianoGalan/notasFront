@@ -25,7 +25,7 @@
     </div>
 
   </div>
-</form>
+
 
 <div class="card mt-3">
   <div class="card-header">
@@ -39,16 +39,42 @@
         <tr>
           <th>Ra</th>
           <th>Aluno</th>
-         
+          <th>P1</th>
+          <th>P2</th>
+          <th>P3</th>
+          <th>T</th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let aluno of alunosh">
-          <td>{{aluno.ra}}</td>
-          <td>{{aluno.nome}}</td>
-         </tr>
+          <td class="col-sm-1">{{aluno.ra}}</td>
+          <td class="col-sm-7">{{aluno.nome}}</td>
+          <td>
+              <input type="number" class="form-control" formControlName="p1"  placeholder="P1">
+          </td>
+          <td>
+              <input type="number" class="form-control" formControlName="p2"  placeholder="P2">
+          </td>
+          <td>
+              <input type="number" class="form-control" formControlName="p3"  placeholder="P3">
+          </td>
+          <td>
+              <input type="number" class="form-control" formControlName="t"  placeholder="T">
+          </td>
+          <td>
+            <span class="float-end">
+              <button class="btn btn-outline-info mb-1 btn-sm" (click)="onSalvar(aluno)" >
+                Salvar
+              </button>
+
+            </span>
+          </td>
+
+        </tr>
       </tbody>
     </table>
+
 
     <ng-template #loading>
       <div class="d-flex justify-content-center">
@@ -59,3 +85,4 @@
     </ng-template>
   </div>
 </div>
+</form>

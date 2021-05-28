@@ -78,16 +78,23 @@ export class AlunoMatricularComponent implements OnInit {
       success => {
 
         this.onRefreshMaterias();
+        this.onRefresh();
       },
+      error => {
+        this.handleError();
+      }
 
     );
 
   }
 
+
+  
+
   handleError() {
     this.bsModalRef = this.modalService.show(AlertModalComponent);
     this.bsModalRef.content.type = 'danger';
-    this.bsModalRef.content.message = 'Erro ao carregar';
+    this.bsModalRef.content.message = 'Erro na matricula';
   }
 
 }

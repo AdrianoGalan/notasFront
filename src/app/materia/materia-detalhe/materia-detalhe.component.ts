@@ -1,3 +1,5 @@
+import { Avaliacao } from './../../avaliacao/avaliacao';
+import { Nota } from './../../nota/nota';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { catchError } from 'rxjs/operators';
@@ -20,12 +22,16 @@ export class MateriaDetalheComponent implements OnInit {
   alunos$!: Observable<Aluno[]>;
   materia!: Materia;
   bsModalRef!: BsModalRef;
+  nota!: Nota;
+  avaliacao!: Avaliacao;
 
   constructor(
     private FormBuilder: FormBuilder,
-    private service: MateriaService,
+    private serviceMateria: MateriaService,
+    //private serviceNota: NotaService,
     private route: ActivatedRoute,
-    private modalService: BsModalService
+    private modalService: BsModalService,
+
   ) { }
 
   ngOnInit(): void {
@@ -39,7 +45,11 @@ export class MateriaDetalheComponent implements OnInit {
 
       matCodigo: [this.materia.codigo],
       matNome: [this.materia.nome],
-      matTurma: [this.materia.turno]
+      matTurma: [this.materia.turno],
+      p1: null,
+      p2: null,
+      p3: null,
+      t: null
 
 
     });
@@ -49,7 +59,7 @@ export class MateriaDetalheComponent implements OnInit {
 
 
   onRefreshAlunos() {
-    this.alunos$ = this.service.getAlunoMatriculado(this.materia.codigo).pipe(
+    this.alunos$ = this.serviceMateria.getAlunoMatriculado(this.materia.codigo).pipe(
       catchError(error => {
         this.handleError();
         return empty();
@@ -60,6 +70,28 @@ export class MateriaDetalheComponent implements OnInit {
     this.bsModalRef = this.modalService.show(AlertModalComponent);
     this.bsModalRef.content.type = 'danger';
     this.bsModalRef.content.message = 'Erro ao carregar';
+  }
+
+  onSalvar(aluno: Aluno) {
+
+    this.nota = new Nota();
+    this.avaliacao = new Avaliacao();
+    this.nota.aluno = aluno
+
+    if (this.materiaForm.get("p1")) {
+      this.avaliacao.codigo = 1;
+      this.avaliacao.tipo = "P1";
+      this.nota.avaliacao = this.avaliacao
+
+      this.nota.nota = this.materiaForm.get("p1")?.value
+
+    }
+
+   // this.serviceNota.
+
+
+    console.log(this.nota)
+
   }
 
 }
