@@ -3,7 +3,7 @@ import { Avaliacao } from './../../avaliacao/avaliacao';
 import { Nota } from './../../nota/nota';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
-import { catchError} from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { Aluno } from './../../aluno/aluno';
 import { ActivatedRoute } from '@angular/router';
@@ -103,9 +103,8 @@ export class MateriaDetalheComponent implements OnInit {
 
     );
 
-
-
-
   }
+
+
 
 }

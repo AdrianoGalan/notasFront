@@ -1,6 +1,6 @@
 import { MateriaService } from './materia.service';
 import { MateriaListaComponent } from './materia-lista/materia-lista.component';
-import { ReactiveFormsModule, FormGroup } from '@angular/forms';
+import { ReactiveFormsModule, FormGroup, FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule, Location } from '@angular/common';
 
