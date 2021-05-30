@@ -11,6 +11,7 @@ import { MateriaService } from './../materia.service';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Materia } from '../materia';
+import { AlunoNota } from 'src/app/aluno/alunoNota';
 
 @Component({
   selector: 'app-materia-detalhe',
@@ -20,7 +21,7 @@ import { Materia } from '../materia';
 export class MateriaDetalheComponent implements OnInit {
 
   materiaForm!: FormGroup;
-  alunos$!: Observable<Aluno[]>;
+  alunos$!: Observable<AlunoNota[]>;
   materia!: Materia;
   bsModalRef!: BsModalRef;
 
@@ -63,7 +64,7 @@ export class MateriaDetalheComponent implements OnInit {
 
 
   onRefreshAlunos() {
-    this.alunos$ = this.serviceMateria.getAlunoMatriculado(this.materia.codigo).pipe(
+    this.alunos$ = this.serviceMateria.getAlunoComNotaMatriculado(this.materia.codigo).pipe(
       catchError(error => {
         this.handleError();
         return empty();

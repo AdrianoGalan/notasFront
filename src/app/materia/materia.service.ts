@@ -5,6 +5,7 @@ import { tap, take, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Materia } from './materia';
+import { AlunoNota } from '../aluno/alunoNota';
 
 
 
@@ -38,6 +39,15 @@ export class MateriaService {
   getAlunoMatriculado(codigoMateria: Number) {
 
     return this.http.get<Aluno[]>(`${this.API}/${"aluno/"}${codigoMateria}`)
+      .pipe(
+        take(1),
+        tap(console.log)
+      );
+  }
+
+  getAlunoComNotaMatriculado(codigoMateria: Number) {
+
+    return this.http.get<AlunoNota[]>(`${this.API}/${"aluno/nota/"}${codigoMateria}`)
       .pipe(
         take(1),
         tap(console.log)
