@@ -8,7 +8,8 @@ import { Observable, empty } from 'rxjs';
 import { Aluno } from './../../aluno/aluno';
 import { ActivatedRoute } from '@angular/router';
 import { MateriaService } from './../materia.service';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { Location } from '@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Materia } from '../materia';
 import { AlunoNota } from 'src/app/aluno/alunoNota';
@@ -35,6 +36,7 @@ export class MateriaDetalheComponent implements OnInit {
     private serviceMateria: MateriaService,
     private serviceNota: NotaService,
     private route: ActivatedRoute,
+    private location: Location,
     private modalService: BsModalService,
     private nota: Nota,
     private avaliacao: Avaliacao,
@@ -81,31 +83,67 @@ export class MateriaDetalheComponent implements OnInit {
 
 
     this.nota.aluno = aluno;
-
-
-
-
     this.nota.disciplina = this.materia
 
-    this.avaliacao.codigo = 1;
-    this.avaliacao.tipo = "P1";
+
+    if (this.materiaForm.get("p1")?.value) {
+      this.salvarNota(1, "p1")
+    }
+
+
+    if (this.materiaForm.get("p2")?.value) {
+      this.salvarNota(2, "p2")
+    }
+
+
+    if (this.materiaForm.get("p3")?.value) {
+      this.salvarNota(3, "p3")
+    }
+
+
+    if (this.materiaForm.get("t")?.value) {
+      this.salvarNota(4, "t")
+    }
+
+
+  }
+
+
+  salvarNota(codigo: number, tipo: string) {
+
+    this.avaliacao.codigo = codigo;
+    this.avaliacao.tipo = tipo;
     this.nota.avaliacao = this.avaliacao;
 
-    this.nota.nota = this.materiaForm.get("p1")?.value;
+    this.nota.nota = this.materiaForm.get(tipo)?.value;
 
-    console.log(this.nota)
+
 
     this.serviceNota.add(this.nota).subscribe(
 
       success => {
 
-        console.log("agora foi");
+        console.log("ok")
       },
+      erro =>{
+
+        this.handleErrorNota();
+
+      }
 
     );
 
   }
 
+  onOk(){
+    this.location.back();
+  }
+
+  handleErrorNota() {
+    this.bsModalRef = this.modalService.show(AlertModalComponent);
+    this.bsModalRef.content.type = 'danger';
+    this.bsModalRef.content.message = 'Nota deve ser entre 0 e 10';
+  }
 
 
 }

@@ -6,6 +6,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Materia } from './materia';
 import { AlunoNota } from '../aluno/alunoNota';
+import { Falta } from '../falta/falta';
 
 
 
@@ -30,10 +31,10 @@ export class MateriaService {
   getByCodigo(codigo: Number) {
 
     return this.http.get<Materia>(`${this.API}/${codigo}`)
-    .pipe(
-      tap(),
-      take(1)
-    );
+      .pipe(
+        tap(),
+        take(1)
+      );
   }
 
   getAlunoMatriculado(codigoMateria: Number) {
@@ -63,6 +64,15 @@ export class MateriaService {
       );
   }
 
+  getDataAulasByMAtaria(codigo: Number) {
+
+    return this.http.get<Aluno[]>(`${this.API}/${"aula/falta/"}${codigo}`)
+      .pipe(
+        take(1),
+        tap(console.log)
+      );
+  }
+
 
   add(matricula: Matricula) {
 
@@ -70,7 +80,11 @@ export class MateriaService {
 
   }
 
+  addFalta(falta: Falta) {
 
+    return this.http.post(`${this.API}/${"add/falta"}`, JSON.stringify(falta), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
+
+  }
 
 
 

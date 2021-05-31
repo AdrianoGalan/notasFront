@@ -6,10 +6,11 @@ import { CommonModule, Location } from '@angular/common';
 
 import { MateriaRoutingModule } from './materia-routing.module';
 import { MateriaDetalheComponent } from './materia-detalhe/materia-detalhe.component';
+import { MateriaFaltasComponent } from './materia-faltas/materia-faltas.component';
 
 
 @NgModule({
-  declarations: [MateriaListaComponent, MateriaDetalheComponent],
+  declarations: [MateriaListaComponent, MateriaDetalheComponent, MateriaFaltasComponent],
 
   imports: [
     CommonModule,

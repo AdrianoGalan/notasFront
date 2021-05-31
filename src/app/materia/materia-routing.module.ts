@@ -1,3 +1,4 @@
+import { MateriaFaltasComponent } from './materia-faltas/materia-faltas.component';
 import { MateriaResolverGuard } from './guards/materia-resolver.guard';
 import { MateriaDetalheComponent } from './materia-detalhe/materia-detalhe.component';
 import { MateriaListaComponent } from './materia-lista/materia-lista.component';
@@ -11,7 +12,14 @@ const routes: Routes = [
     resolve: {
       materia: MateriaResolverGuard
     }
+  },
+  {
+    path: 'faltas/:id', component: MateriaFaltasComponent,
+    resolve: {
+      materia: MateriaResolverGuard
+    }
   }
+
 ];
 
 @NgModule({

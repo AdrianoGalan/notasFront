@@ -49,15 +49,16 @@ export class MateriaListaComponent implements OnInit {
     this.bsModalRef.content.type = 'danger';
     this.bsModalRef.content.message = 'Erro ao carregar';
   }
-  handleErrorDelite(){
-    this.bsModalRef = this.modalService.show(AlertModalComponent);
-    this.bsModalRef.content.type = 'danger';
-    this.bsModalRef.content.message = 'Erro ao deletar';
-  }
 
   onClikTabela(materia: Materia){
 
     this.router.navigate(['detalhe', materia.codigo], {relativeTo: this.route});
+
+  }
+
+  onClikTabelaFaltas(materia: Materia){
+
+    this.router.navigate(['faltas', materia.codigo], {relativeTo: this.route});
 
   }
 

@@ -1,0 +1,93 @@
+<form class="needs-validation" novalidate [formGroup]="materiaForm" style="padding-top: 10px">
+  <div class="row g-3" style="margin-top: 5px;">
+    <div class="float-start">
+      <h2 class="text-center">Disciplina Faltas</h2>
+    </div>
+
+
+    <div class="col-sm-2">
+      <label class="form-label">Codigo</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matCodigo" placeholder="Codigo">
+      </fieldset>
+    </div>
+    <div class="col-sm-8">
+      <label class="form-label">Nome</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matNome" placeholder="Nome">
+      </fieldset>
+    </div>
+    <div class="col-sm-2">
+      <label class="form-label">Turma</label>
+      <fieldset disabled>
+        <input type="text" class="form-control" formControlName="matTurma" placeholder="turma">
+      </fieldset>
+    </div>
+
+    <label class="form-label">Data</label>
+    <div class="col-sm-2">
+      <select class="form-select" formControlName="data">
+
+        <option *ngFor="let aula of aulas$ | async" [ngValue]="aula">{{ aula.data }}</option>
+
+      </select>
+      <!-- <button class="btn btn-outline-info" type="submit">Matricular</button> -->
+    </div>
+
+  </div>
+
+
+  <div class="card mt-3">
+    <div class="card-header">
+      <div class="float-start">
+        <h4>Alunos Matriculados</h4>
+      </div>
+    </div>
+    <div class="card-body">
+      <table class="table  table-hover" *ngIf="(alunos$ | async) as alunosh; else loading">
+        <thead>
+          <tr>
+            <th>Ra</th>
+            <th>Aluno</th>
+            <th>N faltas</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let aluno of alunosh">
+            <td class="col-sm-1">{{aluno.ra}}</td>
+            <td class="col-sm-9">{{aluno.nome}}</td>
+            <td>
+              <input type="number" class="form-control" formControlName="falt"  placeholder="falta">
+            </td>
+            <td>
+              <span class="float-end">
+                <button class="btn btn-outline-info mb-1 btn-sm" (click)="onSalvar(aluno)" >
+                  Salvar
+                </button>
+
+              </span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <div>
+        <span class="float-end">
+          <button class="btn btn-outline-info mb-1 btn-sm" (click)="onOk()">
+            Ok
+          </button>
+
+        </span>
+      </div>
+
+
+      <ng-template #loading>
+        <div class="d-flex justify-content-center">
+          <div class="spinner-border" role="status">
+            <span class="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</form>

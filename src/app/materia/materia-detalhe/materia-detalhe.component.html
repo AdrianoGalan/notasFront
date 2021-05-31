@@ -1,7 +1,7 @@
 <form class="needs-validation" novalidate [formGroup]="materiaForm" style="padding-top: 10px">
   <div class="row g-3" style="margin-top: 5px;">
     <div class="float-start">
-      <h2 class="text-center">Disciplina</h2>
+      <h2 class="text-center">Disciplina Notas</h2>
     </div>
 
 
@@ -51,29 +51,39 @@
           <td class="col-sm-1">{{aluno.ra}}</td>
           <td class="col-sm-6">{{aluno.nome}}</td>
           <td>
-              <input type="number" class="form-control"   formControlName="p1"  placeholder="{{aluno.p1}}">
+              <input type="number" class="form-control"   formControlName="p1" (blur)="onSalvar(aluno)"  placeholder="{{aluno.p1}}">
           </td>
           <td>
-              <input type="number" class="form-control" formControlName="p2"  placeholder="{{aluno.p2}}">
+              <input type="number" class="form-control" formControlName="p2" (blur)="onSalvar(aluno)" placeholder="{{aluno.p2}}">
           </td>
           <td>
-              <input type="number" class="form-control" formControlName="p3"  placeholder="{{aluno.p3}}">
+              <input type="number" class="form-control" formControlName="p3" (blur)="onSalvar(aluno)" placeholder="{{aluno.p3}}">
           </td>
           <td>
-              <input type="number" class="form-control" formControlName="t"  placeholder="{{aluno.t}}">
+              <input type="number" class="form-control" formControlName="t"  (blur)="onSalvar(aluno)" placeholder="{{aluno.t}}">
           </td>
           <td>
-            <span class="float-end">
+            <!-- <span class="float-end">
               <button class="btn btn-outline-info mb-1 btn-sm" (click)="onSalvar(aluno)" >
                 Salvar
               </button>
 
-            </span>
+            </span> -->
           </td>
 
         </tr>
+
       </tbody>
+
     </table>
+    <div>
+      <span class="float-end">
+        <button class="btn btn-outline-info mb-1 btn-sm" (click)="onOk()" >
+          Ok
+        </button>
+
+      </span>
+    </div>
 
 
     <ng-template #loading>

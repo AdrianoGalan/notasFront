@@ -14,6 +14,7 @@
           <th>Turno</th>
           <th>N Aulas</th>
           <th></th>
+          <th></th>
         </tr>
       </thead>
       <tbody>
@@ -27,7 +28,12 @@
 
             <span class="float-end">
               <button class="btn btn-outline-info mb-1 btn-sm" (click)="onClikTabela(materia)">
-                Detalhe
+                Notas
+              </button>
+            </span>
+            <span class="float-end" style="padding-right: 1px;">
+              <button class="btn btn-outline-info mb-1 btn-sm" (click)="onClikTabelaFaltas(materia)">
+                Faltas
               </button>
             </span>
           </td>

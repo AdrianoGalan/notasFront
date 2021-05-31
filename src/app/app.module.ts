@@ -1,3 +1,4 @@
+import { Falta } from './falta/falta';
 import { Nota } from './nota/nota';
 import { AlunoListaModule } from './aluno/aluno-lista/aluno-lista.module';
 import { AlunoFormModule } from './aluno/aluno-form/aluno-form.module';
@@ -30,7 +31,7 @@ import { Avaliacao } from './avaliacao/avaliacao';
     ModalModule.forRoot(),
     AvaliacaoModule
   ],
-  providers: [Nota, Avaliacao],
+  providers: [Nota, Avaliacao, Falta],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
