@@ -87,7 +87,12 @@ export class MateriaDetalheComponent implements OnInit {
 
 
     if (this.materiaForm.get("p1")?.value) {
+      if(this.materiaForm.get("p1")?.value >= 0 && this.materiaForm.get("p1")?.value <= 10  ){
       this.salvarNota(1, "p1")
+      }else{
+
+        this.handleErrorNota();
+      }
     }
 
 
