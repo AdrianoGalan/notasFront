@@ -9,7 +9,7 @@
   <div class="input-group">
     <select class="form-select"  formControlName="curso">
 
-      <option *ngFor="let materia of materias$ | async" [ngValue]="materia">{{ materia.codigo }} - {{ materia.nome }}</option>
+      <option *ngFor="let materia of materias$ | async" [ngValue]="materia.codigo">{{ materia.codigo }} - {{ materia.nome }}</option>
 
     </select>
 
@@ -17,3 +17,44 @@
     <button class="btn btn-outline-info"  (click)="onFaltas()">Faltas</button>
   </div>
 </form>
+
+
+<div class="card-body">
+  <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh; else loading">
+    <thead>
+      <tr>
+        <th>Ra</th>
+        <th>Aluno</th>
+        <th>P1</th>
+        <th>P2</th>
+        <th>P3</th>
+        <th>Trabalho</th>
+        <th>Media Final</th>
+        <th>Numero Faltas</th>
+        <th>Situação</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let relatorio of reltatorioh">
+        <td>{{relatorio.ra}}</td>
+        <td>{{relatorio.nome}}</td>
+        <td>{{relatorio.p1}}</td>
+        <td>{{relatorio.p2}}</td>
+        <td>{{relatorio.p3}}</td>
+        <td>{{relatorio.t}}</td>
+        <td>{{relatorio.mediaFinal}}</td>
+        <td>{{relatorio.numFaltas}}</td>
+        <td>{{relatorio.situacao}}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <ng-template #loading>
+    <div class="d-flex justify-content-center">
+      <h2 class="text-center" style="padding-right: 30px;">Selecione um relatorio</h2>
+      <div class="spinner-border" role="status">
+
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+  </ng-template>
