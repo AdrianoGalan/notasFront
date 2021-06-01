@@ -1,0 +1,19 @@
+<div class="row g-3" style="margin-top: 5px;">
+  <div class="float-start">
+    <h2 class="text-center">Relatorios</h2>
+  </div>
+
+<form class="needs-validation" novalidate [formGroup]="formDisciplina" style="padding-top: 10px">
+
+  <label class="form-label">Disciplina</label>
+  <div class="input-group">
+    <select class="form-select"  formControlName="curso">
+
+      <option *ngFor="let materia of materias$ | async" [ngValue]="materia">{{ materia.codigo }} - {{ materia.nome }}</option>
+
+    </select>
+
+    <button class="btn btn-outline-info"  (click)="onNotas()">Notas</button>
+    <button class="btn btn-outline-info"  (click)="onFaltas()">Faltas</button>
+  </div>
+</form>

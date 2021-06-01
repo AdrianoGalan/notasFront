@@ -20,8 +20,8 @@ const routes: Routes = [
       loadChildren: () => import('./materia/materia.module').then(m => m.MateriaModule)
     },
     {
-      path: 'nota',
-      loadChildren: () => import('./nota/nota.module').then(m => m.NotaModule)
+      path: 'relatorio',
+      loadChildren: () => import('./relatorio/relatorio.module').then(m => m.RelatorioModule)
     },
 
 

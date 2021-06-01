@@ -89,7 +89,7 @@ export class AlunoMatricularComponent implements OnInit {
   }
 
 
-  
+
 
   handleError() {
     this.bsModalRef = this.modalService.show(AlertModalComponent);

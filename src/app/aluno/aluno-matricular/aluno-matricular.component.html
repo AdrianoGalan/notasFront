@@ -22,7 +22,7 @@
   <div class="input-group">
     <select class="form-select"  formControlName="curso">
 
-      <option *ngFor="let materia of materias$ | async" [ngValue]="materia">{{ materia.nome }}</option>
+      <option *ngFor="let materia of materias$ | async" [ngValue]="materia">{{ materia.codigo }} - {{ materia.nome }}</option>
 
     </select>
     <button class="btn btn-outline-info" type="submit">Matricular</button>
