@@ -1,4 +1,3 @@
-import { Nota } from './../nota/nota';
 import { Matricula } from './../matricula/matricula';
 import { Aluno } from './../aluno/aluno';
 import { tap, take, map } from 'rxjs/operators';
@@ -7,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Materia } from './materia';
 import { AlunoNota } from '../aluno/alunoNota';
 import { Falta } from '../falta/falta';
+import { RelatorioData } from '../relatorio/relatorioData';
 
 
 
@@ -73,6 +73,13 @@ export class MateriaService {
       );
   }
 
+  getData(codigo: Number) {
+
+    return this.http.get<RelatorioData>(`${this.API}/${"aula/data/"}${codigo}`).pipe(
+      take(1),
+      tap(console.log)
+    );
+  }
 
   add(matricula: Matricula) {
 

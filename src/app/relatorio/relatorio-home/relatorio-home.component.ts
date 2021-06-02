@@ -1,7 +1,8 @@
+import { RelatorioData } from '../relatorioData';
 import { RelatorioNota } from './../relatorioNota';
 import { RelatorioService } from './../relatorio.service';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
-import { catchError } from 'rxjs/operators';
+import { catchError, tap } from 'rxjs/operators';
 import { Observable, empty } from 'rxjs';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -11,6 +12,7 @@ import { Component, OnInit } from '@angular/core';
 import { Materia } from 'src/app/materia/materia';
 import { Aluno } from 'src/app/aluno/aluno';
 import { RelatorioFalta } from '../relatorioFalta';
+import { connectableObservableDescriptor } from 'rxjs/internal/observable/ConnectableObservable';
 
 @Component({
   selector: 'app-relatorio-home',
@@ -24,6 +26,7 @@ export class RelatorioHomeComponent implements OnInit {
   formDisciplina!: FormGroup;
   relatorio$!: Observable<RelatorioNota[]>;
   relatorioFalta!: Observable<RelatorioFalta[]>;
+  data$!: Observable<RelatorioData>;
   tNota: boolean = false;
   tFalta: boolean = false;
 
@@ -56,6 +59,16 @@ export class RelatorioHomeComponent implements OnInit {
       }));
   }
 
+
+  onRefreshData() {
+    this.data$ = this.service.getData(this.formDisciplina.get("curso")?.value).pipe(
+      catchError(error => {
+        this.handleError('Erro no banco de dados');
+        return empty();
+      }));
+
+  }
+
   onRefreshRelatorioNota() {
     this.relatorio$ = this.serviceRelatorio.getRelatorioNotaByCodigo(this.formDisciplina.get("curso")?.value).pipe(
       catchError(error => {
@@ -79,10 +92,12 @@ export class RelatorioHomeComponent implements OnInit {
 
     if (this.valida()) {
 
-      this.tNota = false;
       this.tFalta = true;
+      this.tNota = false;
 
-      console.log('foi')
+
+      this.onRefreshData()
+
     }
 
   }
