@@ -6,6 +6,7 @@ import { RelatorioRoutingModule } from './relatorio-routing.module';
 import { RelatorioHomeComponent } from './relatorio-home/relatorio-home.component';
 
 
+
 @NgModule({
   declarations: [RelatorioHomeComponent],
   imports: [

@@ -10,6 +10,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { Materia } from 'src/app/materia/materia';
 import { Aluno } from 'src/app/aluno/aluno';
+import { RelatorioFalta } from '../relatorioFalta';
 
 @Component({
   selector: 'app-relatorio-home',
@@ -22,6 +23,9 @@ export class RelatorioHomeComponent implements OnInit {
   bsModalRef!: BsModalRef;
   formDisciplina!: FormGroup;
   relatorio$!: Observable<RelatorioNota[]>;
+  relatorioFalta!: Observable<RelatorioFalta[]>;
+  tNota: boolean = false;
+  tFalta: boolean = false;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -64,6 +68,8 @@ export class RelatorioHomeComponent implements OnInit {
 
     if (this.valida()) {
 
+      this.tFalta = false;
+      this.tNota = true;
       this.onRefreshRelatorioNota()
     }
 
@@ -72,6 +78,9 @@ export class RelatorioHomeComponent implements OnInit {
   onFaltas() {
 
     if (this.valida()) {
+
+      this.tNota = false;
+      this.tFalta = true;
 
       console.log('foi')
     }

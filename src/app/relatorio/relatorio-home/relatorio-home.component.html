@@ -13,14 +13,14 @@
 
     </select>
 
-    <button class="btn btn-outline-info"  (click)="onNotas()">Notas</button>
+    <button class="btn btn-outline-info"  (click)="onNotas()" >Notas</button>
     <button class="btn btn-outline-info"  (click)="onFaltas()">Faltas</button>
   </div>
 </form>
 
-
+<ng-template [ngIf]="tNota">
 <div class="card-body">
-  <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh; else loading">
+  <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh">
     <thead>
       <tr>
         <th>Ra</th>
@@ -48,8 +48,45 @@
       </tr>
     </tbody>
   </table>
+</div>
 
-  <ng-template #loading>
+</ng-template>
+
+<ng-template [ngIf]="tFalta">
+  <div class="card-body">
+    <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh">
+      <thead>
+        <tr>
+          <th>Ra</th>
+          <th>Aluno</th>
+          <th>P1</th>
+          <th>P2</th>
+          <th>P3</th>
+          <th>Trabalho</th>
+          <th>Media Final</th>
+          <th>Numero Faltas</th>
+          <th>Situação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let relatorio of reltatorioh">
+          <td>{{relatorio.ra}}</td>
+          <td>{{relatorio.nome}}</td>
+          <td>{{relatorio.p1}}</td>
+          <td>{{relatorio.p2}}</td>
+          <td>{{relatorio.p3}}</td>
+          <td>{{relatorio.t}}</td>
+          <td>{{relatorio.mediaFinal}}</td>
+          <td>{{relatorio.numFaltas}}</td>
+          <td>{{relatorio.situacao}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  </ng-template>
+
+  <ng-template [ngIf]="!tNota && !tFalta"  >
     <div class="d-flex justify-content-center">
       <h2 class="text-center" style="padding-right: 30px;">Selecione um relatorio</h2>
       <div class="spinner-border" role="status">
