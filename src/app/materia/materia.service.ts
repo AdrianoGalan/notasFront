@@ -1,3 +1,4 @@
+import { AlunoFalta } from './../aluno/alunoFalta';
 import { Matricula } from './../matricula/matricula';
 import { Aluno } from './../aluno/aluno';
 import { tap, take, map } from 'rxjs/operators';
@@ -67,6 +68,15 @@ export class MateriaService {
   getDataAulasByMAtaria(codigo: Number) {
 
     return this.http.get<Aluno[]>(`${this.API}/${"aula/falta/"}${codigo}`)
+      .pipe(
+        take(1),
+        tap(console.log)
+      );
+  }
+
+  getAlunosFaltaByData(codigo: Number, data: string) {
+
+    return this.http.get<AlunoFalta[]>(`${this.API}/${"aluno/falta/"}${codigo}/${data}`)
       .pipe(
         take(1),
         tap(console.log)

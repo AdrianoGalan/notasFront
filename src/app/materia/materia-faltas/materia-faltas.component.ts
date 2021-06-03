@@ -1,3 +1,4 @@
+import { AlunoFalta } from './../../aluno/alunoFalta';
 import { AlertModalComponent } from './../../shared/alert-modal/alert-modal.component';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { catchError } from 'rxjs/operators';
@@ -21,7 +22,7 @@ export class MateriaFaltasComponent implements OnInit {
 
   materiaForm!: FormGroup;
   materia!: Materia;
-  alunos$!: Observable<Aluno[]>;
+  alunos$!: Observable<AlunoFalta[]>;
   bsModalRef!: BsModalRef;
   aulas$!: Observable<Aula[]>
   aula!: Aula;
@@ -52,12 +53,17 @@ export class MateriaFaltasComponent implements OnInit {
     }
     );
 
-    this.onRefreshAlunos()
+
     this.onRefreshAulas()
+
+
+
   }
 
   onRefreshAlunos() {
-    this.alunos$ = this.serviceMateria.getAlunoMatriculado(this.materia.codigo).pipe(
+
+    this.aula = this.materiaForm.get("data")?.value
+    this.alunos$ = this.serviceMateria.getAlunosFaltaByData(this.materia.codigo, this.aula.data ).pipe(
       catchError(error => {
         this.handleError('Erro ao carregar');
         return empty();
@@ -96,6 +102,8 @@ export class MateriaFaltasComponent implements OnInit {
           success => {
 
             console.log("Salvo")
+            this.materiaForm.get("falt")?.setValue(null)
+            this.onRefreshAlunos();
           },
 
         );

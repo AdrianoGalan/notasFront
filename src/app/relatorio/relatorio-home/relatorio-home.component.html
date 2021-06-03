@@ -21,7 +21,7 @@
 
   <ng-template [ngIf]="tNota">
     <div class="card-body">
-      <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh">
+      <table class="table table-bordered border-primary" *ngIf="(relatorio$ | async) as reltatorioh">
         <thead>
           <tr>
             <th>Ra</th>
@@ -55,7 +55,7 @@
 
   <ng-template [ngIf]="tFalta">
     <div class="table-responsive-xxl">
-      <table class="table" *ngIf="(data$ | async) as datah">
+      <table class="table table-bordered border-primary" *ngIf="(data$ | async) as datah">
         <thead>
           <tr>
             <th>Ra</th>
