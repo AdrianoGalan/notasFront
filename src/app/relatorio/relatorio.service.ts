@@ -2,6 +2,7 @@ import { tap, take } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { RelatorioNota } from './relatorioNota';
+import { RelatorioFalta } from './relatorioFalta';
 
 @Injectable({
   providedIn: 'root'
@@ -21,4 +22,16 @@ export class RelatorioService {
         take(1)
       );
   }
+
+  getRelatorioFaltaByCodigo(codigo: Number) {
+
+    return this.http.get<RelatorioFalta[]>(`${this.API}/falta/${codigo}`)
+      .pipe(
+        tap(),
+        take(1)
+      );
+  }
+
+
+
 }

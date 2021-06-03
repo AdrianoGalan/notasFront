@@ -25,10 +25,11 @@ export class RelatorioHomeComponent implements OnInit {
   bsModalRef!: BsModalRef;
   formDisciplina!: FormGroup;
   relatorio$!: Observable<RelatorioNota[]>;
-  relatorioFalta!: Observable<RelatorioFalta[]>;
+  relatorioFalta$!: Observable<RelatorioFalta[]>;
   data$!: Observable<RelatorioData>;
   tNota: boolean = false;
   tFalta: boolean = false;
+
 
   constructor(
     private formBuilder: FormBuilder,
@@ -69,6 +70,15 @@ export class RelatorioHomeComponent implements OnInit {
 
   }
 
+  onRefreshRelatorioFalta() {
+    this.relatorioFalta$ = this.serviceRelatorio.getRelatorioFaltaByCodigo(this.formDisciplina.get("curso")?.value).pipe(
+      catchError(error => {
+        this.handleError('Erro no banco de dados');
+        return empty();
+      }));
+
+  }
+
   onRefreshRelatorioNota() {
     this.relatorio$ = this.serviceRelatorio.getRelatorioNotaByCodigo(this.formDisciplina.get("curso")?.value).pipe(
       catchError(error => {
@@ -96,7 +106,8 @@ export class RelatorioHomeComponent implements OnInit {
       this.tNota = false;
 
 
-      this.onRefreshData()
+      this.onRefreshData();
+      this.onRefreshRelatorioFalta();
 
     }
 

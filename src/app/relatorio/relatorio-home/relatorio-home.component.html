@@ -3,97 +3,119 @@
     <h2 class="text-center">Relatorios</h2>
   </div>
 
-<form class="needs-validation" novalidate [formGroup]="formDisciplina" style="padding-top: 10px">
+  <form class="needs-validation" novalidate [formGroup]="formDisciplina" style="padding-top: 10px">
 
-  <label class="form-label">Disciplina</label>
-  <div class="input-group">
-    <select class="form-select"  formControlName="curso">
+    <label class="form-label">Disciplina</label>
+    <div class="input-group">
+      <select class="form-select" formControlName="curso">
 
-      <option *ngFor="let materia of materias$ | async" [ngValue]="materia.codigo">{{ materia.codigo }} - {{ materia.nome }}</option>
+        <option *ngFor="let materia of materias$ | async" [ngValue]="materia.codigo">{{ materia.codigo }} - {{
+          materia.nome }}</option>
 
-    </select>
+      </select>
 
-    <button class="btn btn-outline-info"  (click)="onNotas()" >Notas</button>
-    <button class="btn btn-outline-info"  (click)="onFaltas()">Faltas</button>
-  </div>
-</form>
+      <button class="btn btn-outline-info" (click)="onNotas()">Notas</button>
+      <button class="btn btn-outline-info" (click)="onFaltas()">Faltas</button>
+    </div>
+  </form>
 
-<ng-template [ngIf]="tNota">
-<div class="card-body">
-  <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh">
-    <thead>
-      <tr>
-        <th>Ra</th>
-        <th>Aluno</th>
-        <th>P1</th>
-        <th>P2</th>
-        <th>P3</th>
-        <th>Trabalho</th>
-        <th>Media Final</th>
-        <th>Numero Faltas</th>
-        <th>Situação</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let relatorio of reltatorioh">
-        <td>{{relatorio.ra}}</td>
-        <td>{{relatorio.nome}}</td>
-        <td>{{relatorio.p1}}</td>
-        <td>{{relatorio.p2}}</td>
-        <td>{{relatorio.p3}}</td>
-        <td>{{relatorio.t}}</td>
-        <td>{{relatorio.mediaFinal}}</td>
-        <td>{{relatorio.numFaltas}}</td>
-        <td>{{relatorio.situacao}}</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-</ng-template>
-
-<ng-template [ngIf]="tFalta">
-  <div class="card-body">
-    <table class="table  table-hover" *ngIf="(data$ | async) as datah">
-      <thead>
-        <tr >
-          <th>Ra</th>
-          <th>Aluno</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d1}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d2}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d3}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d4}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d5}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d6}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d7}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d8}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d9}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d10}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d11}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d12}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d13}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d14}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d15}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d16}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d17}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d18}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d19}}</th>
-          <th style="writing-mode: vertical-lr;">{{datah.d20}}</th>
-          <th>Total</th>
-        </tr>
-      </thead>
-      <!-- <tbody>
-        <tr *ngFor="let dat of datah">
-          <td>{{dat.d1}}</td>
-
-        </tr>
-      </tbody> -->
-    </table>
-  </div>
+  <ng-template [ngIf]="tNota">
+    <div class="card-body">
+      <table class="table  table-hover" *ngIf="(relatorio$ | async) as reltatorioh">
+        <thead>
+          <tr>
+            <th>Ra</th>
+            <th>Aluno</th>
+            <th>P1</th>
+            <th>P2</th>
+            <th>P3</th>
+            <th>Trabalho</th>
+            <th>Media Final</th>
+            <th>Numero Faltas</th>
+            <th>Situação</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let relatorio of reltatorioh">
+            <td>{{relatorio.ra}}</td>
+            <td>{{relatorio.nome}}</td>
+            <td>{{relatorio.p1}}</td>
+            <td>{{relatorio.p2}}</td>
+            <td>{{relatorio.p3}}</td>
+            <td>{{relatorio.t}}</td>
+            <td>{{relatorio.mediaFinal}}</td>
+            <td>{{relatorio.numFaltas}}</td>
+            <td>{{relatorio.situacao}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
 
   </ng-template>
 
-  <ng-template [ngIf]="!tNota && !tFalta"  >
+  <ng-template [ngIf]="tFalta">
+    <div class="table-responsive-xxl">
+      <table class="table" *ngIf="(data$ | async) as datah">
+        <thead>
+          <tr>
+            <th>Ra</th>
+            <th>Aluno</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d1}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d2}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d3}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d4}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d5}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d6}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d7}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d8}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d9}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d10}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d11}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d12}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d13}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d14}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d15}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d16}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d17}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d18}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d19}}</th>
+            <th style="writing-mode: vertical-lr;">{{datah.d20}}</th>
+            <th>Total</th>
+          </tr>
+        </thead>
+        <tbody *ngIf="(relatorioFalta$ | async) as reFal">
+          <tr *ngFor="let rF of reFal">
+            <td>{{rF.ra}}</td>
+            <td>{{rF.nome}}</td>
+            <td>{{rF.d1}}</td>
+            <td>{{rF.d2}}</td>
+            <td>{{rF.d3}}</td>
+            <td>{{rF.d4}}</td>
+            <td>{{rF.d5}}</td>
+            <td>{{rF.d6}}</td>
+            <td>{{rF.d7}}</td>
+            <td>{{rF.d8}}</td>
+            <td>{{rF.d9}}</td>
+            <td>{{rF.d10}}</td>
+            <td>{{rF.d11}}</td>
+            <td>{{rF.d12}}</td>
+            <td>{{rF.d13}}</td>
+            <td>{{rF.d14}}</td>
+            <td>{{rF.d15}}</td>
+            <td>{{rF.d16}}</td>
+            <td>{{rF.d17}}</td>
+            <td>{{rF.d18}}</td>
+            <td>{{rF.d19}}</td>
+            <td>{{rF.d20}}</td>
+            <td>{{rF.totalFaltas}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+  </ng-template>
+
+  <ng-template [ngIf]="!tNota && !tFalta">
     <div class="d-flex justify-content-center">
       <h2 class="text-center" style="padding-right: 30px;">Selecione um relatorio</h2>
       <div class="spinner-border" role="status">
