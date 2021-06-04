@@ -128,7 +128,7 @@ export class MateriaDetalheComponent implements OnInit {
 
       success => {
 
-        console.log("ok")
+        
       },
       erro =>{
 

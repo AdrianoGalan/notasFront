@@ -25,7 +25,7 @@ export class MateriaService {
     return this.http.get<Materia[]>(this.API)
       .pipe(
         take(1),
-        tap(console.log)
+        tap()
       );
   }
 
@@ -43,7 +43,7 @@ export class MateriaService {
     return this.http.get<Aluno[]>(`${this.API}/${"aluno/"}${codigoMateria}`)
       .pipe(
         take(1),
-        tap(console.log)
+        tap()
       );
   }
 
@@ -52,7 +52,7 @@ export class MateriaService {
     return this.http.get<AlunoNota[]>(`${this.API}/${"aluno/nota/"}${codigoMateria}`)
       .pipe(
         take(1),
-        tap(console.log)
+        tap()
       );
   }
 
@@ -79,7 +79,7 @@ export class MateriaService {
     return this.http.get<AlunoFalta[]>(`${this.API}/${"aluno/falta/"}${codigo}/${data}`)
       .pipe(
         take(1),
-        tap(console.log)
+        tap()
       );
   }
 
@@ -87,7 +87,7 @@ export class MateriaService {
 
     return this.http.get<RelatorioData>(`${this.API}/${"aula/data/"}${codigo}`).pipe(
       take(1),
-      tap(console.log)
+      tap()
     );
   }
 

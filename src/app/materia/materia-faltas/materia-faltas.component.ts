@@ -87,7 +87,7 @@ export class MateriaFaltasComponent implements OnInit {
       if (this.materiaForm.get("falt")?.value > 0 && this.materiaForm.get("falt")?.value < 5) {
 
         const alu: Aluno = aluno
-        console.log(alu)
+
 
 
 
@@ -101,7 +101,7 @@ export class MateriaFaltasComponent implements OnInit {
 
           success => {
 
-            console.log("Salvo")
+          
             this.materiaForm.get("falt")?.setValue(null)
             this.onRefreshAlunos();
           },

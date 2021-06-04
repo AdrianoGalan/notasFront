@@ -43,7 +43,7 @@ export class AlunoFormComponent implements OnInit {
   }
 
   hasError(field: string) {
-    console.log(this.aluno.get(field)?.errors)
+
     return this.aluno.get(field)?.errors
   }
 
@@ -64,8 +64,8 @@ export class AlunoFormComponent implements OnInit {
   onCancel() {
     this.submitted = false;
     this.aluno.reset();
-    // console.log('onCancel');
+   
   }
 
-  
+
 }

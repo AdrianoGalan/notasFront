@@ -15,27 +15,19 @@ export class NotaService {
 
   list() {
 
-    console.log("passou aki")
+
     return this.http.get<Nota[]>(this.API).pipe(
-        tap(console.log)
+      take(1),
+      tap()
       );
   }
 
 
 
-  // getAlunoMatriculado(codigoMateria: Number) {
-
-  //   return this.http.get<Aluno[]>(`${this.API}/${"aluno/"}${codigoMateria}`)
-  //     .pipe(
-  //       tap(console.log)
-  //     );
-  // }
-
-
 
   add(nota: Nota) {
 
-    console.log(nota);
+
     return this.http.post(`${this.API}/${"add"}`, JSON.stringify(nota), { headers: new HttpHeaders().set('Content-Type', 'application/json'), responseType: 'text' }).pipe(take(1));
 
   }
