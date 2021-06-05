@@ -113,6 +113,14 @@ export class RelatorioHomeComponent implements OnInit {
 
   }
 
+  onGerarRelatorio(nome: string) {
+
+    const rel  = this.formDisciplina.get('curso')?.value;
+
+    window.open( `http://localhost:8080/WebServiceNotas/relatorio/jasper/${nome}/${rel}`);
+
+  }
+
   valida() {
 
 

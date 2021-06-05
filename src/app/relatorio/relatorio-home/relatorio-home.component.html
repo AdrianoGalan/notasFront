@@ -49,6 +49,12 @@
           </tr>
         </tbody>
       </table>
+
+      <div class="float-end">
+        <button type="button" class="btn btn-outline-info" (click)="onGerarRelatorio('nota')" >Gerar PDF</button>
+      </div>
+
+
     </div>
 
   </ng-template>
@@ -111,7 +117,12 @@
           </tr>
         </tbody>
       </table>
+      <div class="float-end">
+        <button type="button" class="btn btn-outline-info" (click)="onGerarRelatorio('falta')" >Gerar PDF</button>
+      </div>
     </div>
+
+
 
   </ng-template>
 
